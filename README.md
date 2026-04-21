@@ -12,3 +12,11 @@ Pada Milestone 2, kapabilitas server ditingkatkan sehingga tidak lagi hanya memb
 
 ![Commit 2 screen capture](assets/images/commit2.png)
 
+---
+
+### Commit 3 Reflection notes
+Milestone 3 memperkenalkan logika routing dasar pada server dengan cara memvalidasi baris pertama dari sebuah HTTP request, yaitu request line. Mekanismenya bekerja dengan cara memeriksa secara spesifik apakah request line tersebut sama persis dengan rute `"GET / HTTP/1.1"`. Jika hasil evaluasinya salah, server diprogram untuk secara otomatis membalas dengan status 404 NOT FOUND beserta halaman HTML kustom (404.html) untuk peringatan tersebut. Di samping logika kondisional, pada bagian ini saya juga menerapkan refactoring kode yang esensial demi mematuhi prinsip Clean Code, khususnya DRY (Don't Repeat Yourself). Alih-alih menulis ulang seluruh blok kode perakitan HTTP response pada setiap cabang if-else, saya hanya mengekstrak nilai variabel spesifik yaitu `status_line` dan `filename` ke dalam tuple variable bindings. Setelah tuple tersebut dievaluasi, eksekusi kode di bawahnya akan secara universal menangani pembacaan file dan pengiriman response yang sesuai terlepas dari cabang mana yang dipilih. Refactoring ini sangat memabntu membuat kode menjadi jauh lebih terstruktur, ringkas, serta meminimalisir peluang modifikasi yang tertinggal jika nanti harus mengelola puluhan routes tambahan.
+
+![Commit 3 screen capture](assets/images/commit3.png)
+
+---
