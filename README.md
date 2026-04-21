@@ -20,3 +20,8 @@ Milestone 3 memperkenalkan logika routing dasar pada server dengan cara memvalid
 ![Commit 3 screen capture](assets/images/commit3.png)
 
 ---
+
+### Commit 4 Reflection notes
+Pada Milestone 4, membuat simulasi langsung dari salah satu kelemahan dalam arsitektur server web *single-threaded*, yaitu proses yang memblokir satu sama lain (sinkronus). Dengan menyisipkan rute uji coba `/sleep` yang menjalankan fungsi `thread::sleep(Duration::from_secs(10))`, operasi pada *thread* utama akan dihentikan secara paksa selama 10 detik. Jika dalam waktu jeda tersebut ada user lain di tab browser terpisah yang meminta halaman utama `/`, ia harus terdiam dan menunggu proses untuk user pertama benar-benar selesai. Demonstrasi ini membuktikan bahwa di bawah pengaplikasian *single thread*, semua antrian *TCP request* diproses secara bergilir dan mutlak menghambat satu sama lain. Dalam skenario operasional dunia nyata, sifat sekuensial ini dapat merusak User Experience (UX) seketika jika terdapat satu saja rute yang menuntut beban komputasi besar atau interaksi basis data yang lambat. Oleh karena itu, migrasi menuju arsitektur yang mendukung proses konkuren atau asinkronus menjadi sebuah syarat wajib (mandatory) bagi server web modern, menunjukkan pentingnya konsep *multi-threading*.
+
+---
